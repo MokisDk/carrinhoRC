@@ -152,11 +152,11 @@ static void IRAM_ATTR controle_pulso(void *arg)
     if (pin == ACELERACAO_PIN)
     {
         if (gpio_get_level(pin) == 1)
-        { // Borda de Subida (Início)
+        { // Borda de Subida 
             time_aceleracao_borda = time_atual;
         }
         else
-        { // Borda de Descida (Fim)
+        { // Borda de Descida 
             uint32_t duracao_Pulse = (uint32_t)(time_atual - time_aceleracao_borda);
             if (duracao_Pulse >= 900 && duracao_Pulse <= 2100)
             {
@@ -167,11 +167,11 @@ static void IRAM_ATTR controle_pulso(void *arg)
     else if (pin == DIRECAO_PIN)
     {
         if (gpio_get_level(pin) == 1)
-        { // Borda de Subida (Início)
+        { // Borda de Subida 
             time_direcao_borda = time_atual;
         }
         else
-        { // Borda de Descida (Fim)
+        { // Borda de Descida 
             uint32_t duracaoPulso = (uint32_t)(time_atual - time_direcao_borda);
             if (duracaoPulso >= 900 && duracaoPulso <= 2100)
             {
@@ -235,11 +235,11 @@ void carrinho_controle(void *arg)
 
 void app_main(void)
 {
-    //ESP_LOGI(TAG, "Inicializando sistema de controle");
 
     inicializar_pwm();
     inicializar_saida_entre();
 
     xTaskCreate(carrinho_controle, "RC_Control", 4096, NULL, 5, NULL);
 }
+
 
