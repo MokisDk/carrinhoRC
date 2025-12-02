@@ -1,11 +1,12 @@
 idf_component_register(
     SRCS "main.c" 
 
-    # Adicionando os drivers que seu código C utiliza:
+    #para adicionar os drives necessarios
     PRIV_REQUIRES 
-        freertos     # Para Tasks e vTaskDelay
-        driver       # <--- SOLUÇÃO para "driver/gpio.h" e "driver/ledc.h"
-        esp_timer    # <--- SOLUÇÃO para "esp_timer.h"
+        freertos    
+        driver       
+        esp_timer    
         esp_system   
-        log          # Para ESP_LOGI
+        log          
 )
+
