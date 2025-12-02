@@ -89,10 +89,13 @@ void definir_MOTOR_dc(int duty, int direcao)
 void definir_angulo_SERVO (int angulo)
 {
     if (angulo < 0)
+    {
         angulo = 0;
+    }
     if (angulo > 180)
+    {
         angulo = 180;
-
+    }
     uint32_t largura_pulso = 500 + (angulo * 2000) / 180;
 
     // Duty = ( lergura do pulso * 2^16) / 20000us
@@ -124,7 +127,7 @@ void inicializar_saida_entre()
     // Configuração dos pinos de Saída e Entrada
     gpio_set_direction(MOTOR_IN1_PIN, GPIO_MODE_OUTPUT); //direçao dos pinos
     gpio_set_direction(MOTOR_IN2_PIN, GPIO_MODE_OUTPUT);
-    gpio_set_level(MOTOR_IN1_PIN, 0); //nivel voltagem ** n esquecer 
+    gpio_set_level(MOTOR_IN1_PIN, 0); //nivel voltagem 
     gpio_set_level(MOTOR_IN2_PIN, 0);
 
     gpio_install_isr_service(0); //ativo interrupção
@@ -135,7 +138,7 @@ void inicializar_saida_entre()
     gpio_set_intr_type(ACELERACAO_PIN, GPIO_INTR_ANYEDGE);
     gpio_set_intr_type(DIRECAO_PIN, GPIO_INTR_ANYEDGE);
 
-    // Adiciona o handler (a função ISR) para cada pino
+      //um mediador a mudanças e mediçoes do controle pro esp****
     gpio_isr_handler_add(ACELERACAO_PIN, controle_pulso, (void *)ACELERACAO_PIN);
     gpio_isr_handler_add(DIRECAO_PIN, controle_pulso, (void *)DIRECAO_PIN);
 }
@@ -239,3 +242,4 @@ void app_main(void)
 
     xTaskCreate(carrinho_controle, "RC_Control", 4096, NULL, 5, NULL);
 }
+
